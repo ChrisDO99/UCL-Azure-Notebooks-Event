@@ -1,0 +1,41 @@
+Code Cell 1
+
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.linear_model import LinearRegression
+import seaborn as sns; sns.set()
+
+Code Cell 2
+
+yearsBase, meanBase = np.loadtxt('5-year-mean-1951-1980.csv', delimiter=',', usecols=(0, 1), unpack=True) 
+years, mean = np.loadtxt('5-year-mean-1882-2014.csv', delimiter=',', usecols=(0, 1), unpack=True)
+
+Code Cell 3
+
+# Creates a linear regression from the data points 
+m,b = np.polyfit(yearsBase, meanBase, 1)
+
+# This is a simple y = mx + b line function 
+def f(x):
+    return m*x + b 
+
+# This generates a scatter plot, but adds a line plot using the function above 
+plt.scatter(yearsBase, meanBase) 
+plt.plot(yearsBase, f(yearsBase)) 
+plt.title('scatter plot of mean temp difference vs year') 
+plt.xlabel('years', fontsize=12) 
+plt.ylabel('mean temp difference', fontsize=12); 
+plt.show() 
+
+# Prints text to the screen showing the computed values of m and b 
+print(' y = {0} * x + {1}'.format(m, b)) 
+plt.show()
+
+Code Cell 4
+
+plt.scatter(years, mean) 
+plt.title('scatter plot of mean temp difference vs year') 
+plt.xlabel('years', fontsize=12) 
+plt.ylabel('mean temp difference', fontsize=12); 
+sns.regplot(yearsBase, meanBase) 
+plt.show()
